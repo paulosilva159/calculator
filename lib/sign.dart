@@ -7,16 +7,8 @@ enum Sign {
   const Sign(this.symbol, this.rules);
 
   factory Sign.fromSymbol(String value) {
-    var symbol = value;
-
-    if (value == '+-' || value == '-+') {
-      symbol = '-';
-    } else if (value == '--' || value == '++') {
-      symbol = '+';
-    }
-
     try {
-      return Sign.values.singleWhere((sign) => sign.symbol == symbol);
+      return Sign.values.singleWhere((sign) => sign.symbol == value);
     } catch (_) {
       throw UnrecognizedSymbolException(value);
     }

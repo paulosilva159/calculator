@@ -33,9 +33,22 @@ class Validator {
   }
 
   static ValidOperationValues validateOperationInput(Sign sign, String input) {
-    final values = input.split(sign.symbol);
-    final left = values.first;
-    final right = values.last;
+    List<String> values;
+    String left;
+    String right;
+
+    if (input.length == 2) {
+      left = '';
+      right = input;
+    } else if (input[0] == sign.symbol) {
+      values = input.substring(1).split(sign.symbol);
+      left = '${input[0]}${values.first}';
+      right = values.last;
+    } else {
+      values = input.split(sign.symbol);
+      left = values.first;
+      right = values.last;
+    }
 
     for (final rule in sign.rules) {
       switch (rule) {
